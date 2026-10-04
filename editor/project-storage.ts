@@ -1,65 +1,42 @@
 import type { SiteProject } from "./model";
 
-const TOKEN_KEY = "renwoxing-editor-token";
+const DRAFT_KEY = "p-wpe-pages-preview-draft";
+const PUBLISHED_KEY = "p-wpe-pages-preview-published";
 
-function storedToken() {
-  if (typeof window === "undefined") return "";
-  return window.localStorage.getItem(TOKEN_KEY) ?? "";
-}
+function readProject(key: string) {
+  if (typeof window === "undefined") return null;
+  const raw = window.localStorage.getItem(key);
+  if (!raw) return null;
 
-function requireToken() {
-  const existing = storedToken();
-  if (existing) return existing;
-
-  const entered =
-    window.prompt("請輸入任我行編輯器儲存金鑰")?.trim() ?? "";
-  if (entered) window.localStorage.setItem(TOKEN_KEY, entered);
-  return entered;
+  try {
+    return JSON.parse(raw) as SiteProject;
+  } catch {
+    window.localStorage.removeItem(key);
+    return null;
+  }
 }
 
 export function getEditorToken() {
-  return requireToken();
+  return "github-pages-preview";
 }
 
 export async function loadDraft() {
-  const token = requireToken();
-  if (!token) return null;
-
-  const response = await fetch("/api/site-project", {
-    headers: { "x-editor-token": token },
-    cache: "no-store",
-  });
-  if (!response.ok) {
-    window.localStorage.removeItem(TOKEN_KEY);
-    return null;
-  }
-
-  const payload = (await response.json()) as {
-    project?: SiteProject | null;
-  };
-  return payload.project ?? null;
+  return readProject(DRAFT_KEY);
 }
 
 export async function persistProject(
   project: SiteProject,
   action: "save" | "publish",
 ) {
-  const token = requireToken();
-  if (!token) return { ok: false, cancelled: true };
+  if (typeof window === "undefined") {
+    return { ok: false, cancelled: true };
+  }
 
-  const response = await fetch("/api/site-project", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-editor-token": token,
-    },
-    body: JSON.stringify({ action, project }),
-  });
+  const serialized = JSON.stringify(project);
+  window.localStorage.setItem(DRAFT_KEY, serialized);
 
-  if (!response.ok) {
-    window.localStorage.removeItem(TOKEN_KEY);
-    const payload = await response.json().catch(() => null);
-    throw new Error(payload?.error ?? "儲存失敗");
+  if (action === "publish") {
+    window.localStorage.setItem(PUBLISHED_KEY, serialized);
   }
 
   return { ok: true, cancelled: false };
