@@ -1,6 +1,6 @@
 import type { SiteProject } from "./model";
 
-const DRAFT_KEY = "p-wpe-editor-draft";
+const DRAFT_KEY = "p-wpe-universal-v1-draft";
 
 function readProject() {
   if (typeof window === "undefined") return null;
