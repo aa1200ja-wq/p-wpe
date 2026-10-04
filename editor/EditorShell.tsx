@@ -19,11 +19,8 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
         <strong>{c.project.name}</strong>
         <div>
           <span className="save-status">{c.saveState}</span>
-          <button disabled={c.saving} onClick={() => c.save("save")}>
+          <button disabled={c.saving} onClick={c.save}>
             儲存草稿
-          </button>
-          <button disabled={c.saving} onClick={() => c.save("publish")}>
-            儲存並發布
           </button>
           <button
             className={c.viewport === "desktop" ? "active" : ""}
@@ -37,7 +34,6 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
           >
             手機
           </button>
-          <a href="/site" target="_blank">查看正式網站</a>
         </div>
       </header>
 
