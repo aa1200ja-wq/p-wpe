@@ -177,18 +177,12 @@ export function useEditorController(initialProject: SiteProject) {
     deletePageNow(deleteDialog);
     setDeleteDialog(null);
   }
-  async function save(action: "save" | "publish") {
+  async function save() {
     setSaving(true);
-    setSaveState(action === "publish" ? "發布中…" : "儲存中…");
+    setSaveState("儲存中…");
     try {
-      const result = await persistProject(project, action);
-      setSaveState(
-        result.cancelled
-          ? "已取消"
-          : action === "publish"
-            ? "已發布"
-            : "草稿已儲存",
-      );
+      const result = await persistProject(project);
+      setSaveState(result.cancelled ? "已取消" : "草稿已儲存");
     } catch (error) {
       setSaveState(error instanceof Error ? error.message : "儲存失敗");
     } finally {
