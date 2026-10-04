@@ -1,26 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { SiteRenderer } from "@/editor/SiteRenderer";
+import { useEffect, useState } from "react";
 import { genericProject } from "@/editor/generic-project";
-import type { ViewportMode } from "@/editor/model";
+import type { SiteProject } from "@/editor/model";
+import { loadDraft } from "@/editor/project-storage";
+import { PublicProjectSite } from "@/site/PublicProjectSite";
 
 export default function PreviewPage() {
-  const [viewport, setViewport] = useState<ViewportMode>("desktop");
-  const page = genericProject.pages[0];
+  const [project, setProject] = useState<SiteProject>(genericProject);
 
-  return (
-    <main className="preview-shell">
-      <div className="preview-toolbar">
-        <strong>Renderer 預覽</strong>
-        <div>
-          <button onClick={() => setViewport("desktop")}>桌機</button>
-          <button onClick={() => setViewport("mobile")}>手機</button>
-        </div>
-      </div>
-      <div className="preview-stage">
-        <SiteRenderer page={page} viewport={viewport} />
-      </div>
-    </main>
-  );
+  useEffect(() => {
+    loadDraft().then((draft) => {
+      if (draft?.pages?.length) setProject(draft);
+    });
+  }, []);
+
+  return <PublicProjectSite project={project} />;
 }
