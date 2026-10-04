@@ -5,6 +5,7 @@ export type ElementType =
   | "youtube"
   | "button"
   | "line"
+  | "shape"
   | "component";
 
 export type ViewportSize = {
@@ -45,6 +46,7 @@ export type AnimationSpec = {
 
 export type SiteAction =
   | { type: "navigate"; targetPageId: string }
+  | { type: "url"; href: string; newTab?: boolean }
   | { type: "lightbox" };
 
 export type MemberItem = {
@@ -81,10 +83,7 @@ export type SiteElement = {
   desktopStyle?: Record<string, string | number>;
   mobileStyle?: Record<string, string | number>;
   settings?: Partial<
-    Record<
-      ViewportMode,
-      Record<string, string | number | boolean>
-    >
+    Record<ViewportMode, Record<string, string | number | boolean>>
   >;
   componentData?: ComponentData;
   animation?: AnimationSpec;
@@ -94,6 +93,7 @@ export type SiteElement = {
 export type SitePage = {
   id: string;
   name: string;
+  slug?: string;
   viewport: Record<ViewportMode, ViewportSize>;
   overflow: "hidden" | "visible";
   background: string;
@@ -103,6 +103,7 @@ export type SitePage = {
 export type SiteProject = {
   id: string;
   name: string;
+  homePageId?: string;
   layoutVersion?: number;
   pages: SitePage[];
 };
