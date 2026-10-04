@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/import-renwoxing.yml"
+      - "IMPORT_NOW"
 
 permissions:
   contents: write
