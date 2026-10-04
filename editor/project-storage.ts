@@ -1,43 +1,29 @@
 import type { SiteProject } from "./model";
 
-const DRAFT_KEY = "p-wpe-pages-preview-draft";
-const PUBLISHED_KEY = "p-wpe-pages-preview-published";
+const DRAFT_KEY = "p-wpe-editor-draft";
 
-function readProject(key: string) {
+function readProject() {
   if (typeof window === "undefined") return null;
-  const raw = window.localStorage.getItem(key);
+  const raw = window.localStorage.getItem(DRAFT_KEY);
   if (!raw) return null;
 
   try {
     return JSON.parse(raw) as SiteProject;
   } catch {
-    window.localStorage.removeItem(key);
+    window.localStorage.removeItem(DRAFT_KEY);
     return null;
   }
 }
 
-export function getEditorToken() {
-  return "github-pages-preview";
-}
-
 export async function loadDraft() {
-  return readProject(DRAFT_KEY);
+  return readProject();
 }
 
-export async function persistProject(
-  project: SiteProject,
-  action: "save" | "publish",
-) {
+export async function persistProject(project: SiteProject) {
   if (typeof window === "undefined") {
     return { ok: false, cancelled: true };
   }
 
-  const serialized = JSON.stringify(project);
-  window.localStorage.setItem(DRAFT_KEY, serialized);
-
-  if (action === "publish") {
-    window.localStorage.setItem(PUBLISHED_KEY, serialized);
-  }
-
+  window.localStorage.setItem(DRAFT_KEY, JSON.stringify(project));
   return { ok: true, cancelled: false };
 }
