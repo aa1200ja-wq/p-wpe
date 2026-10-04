@@ -38,6 +38,9 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
           >
             手機
           </button>
+          <a href="../preview/" target="_blank" rel="noreferrer">
+            預覽草稿
+          </a>
         </div>
       </header>
 
