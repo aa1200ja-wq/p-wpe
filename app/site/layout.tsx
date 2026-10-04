@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "任我行薩克斯風社",
-  description: "任我行薩克斯風社官方網站",
+  title: "網站預覽",
+  description: "Private Web Page Editor 前台預覽",
 };
 
 export default function SiteLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return children;
 }
