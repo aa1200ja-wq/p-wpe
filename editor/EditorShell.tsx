@@ -3,7 +3,6 @@
 import { EditorContextMenu } from "./EditorContextMenu";
 import { EditorSidebar } from "./EditorSidebar";
 import { InspectorPanel } from "./InspectorPanel";
-import { isInnerPage } from "./inner-page-sync";
 import type { SiteProject } from "./model";
 import { PageDeleteDialog } from "./PageDeleteDialog";
 import { SelectionOverlay } from "./SelectionOverlay";
@@ -16,7 +15,12 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
   return (
     <div className="editor-shell" onMouseDown={() => c.setMenu(null)}>
       <header className="editor-topbar">
-        <strong>{c.project.name}</strong>
+        <input
+          className="project-name-input"
+          value={c.project.name}
+          onChange={(event) => c.setProjectName(event.target.value)}
+          aria-label="網站名稱"
+        />
         <div>
           <span className="save-status">{c.saveState}</span>
           <button disabled={c.saving} onClick={c.save}>
@@ -40,26 +44,26 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
       <EditorSidebar
         project={c.project}
         page={c.page}
+        viewport={c.viewport}
         selectedIds={c.selectedIds}
         onPageChange={c.changePage}
         onPageRename={c.renamePage}
         onElementSelect={(id) => c.selectElement(id)}
         onAddElement={c.addElement}
         onAddPage={c.addPage}
+        onDuplicatePage={c.duplicateCurrentPage}
         onDeletePage={c.requestDeletePage}
-        innerSyncAvailable={isInnerPage(c.page.id)}
-        syncInnerPages={c.syncInnerPages}
-        onSyncInnerPagesChange={c.setSyncInnerPages}
-        onApplyInnerTemplate={c.applyTemplate}
+        onMovePage={c.moveCurrentPage}
+        onSetHomePage={c.setHomePage}
+        onMoveLayer={c.moveLayer}
       />
 
       <main
         className="editor-canvas"
         onContextMenu={(event) => {
           event.preventDefault();
-          const element = (event.target as HTMLElement).closest<HTMLElement>(
-            "[data-editor-id]",
-          );
+          const target = event.target as HTMLElement;
+          const element = target.closest<HTMLElement>("[data-editor-id]");
           const id = element?.dataset.editorId;
           if (id && !c.selectedIds.includes(id)) c.setSelectedIds([id]);
           c.setMenu({ x: event.clientX, y: event.clientY });
@@ -82,15 +86,21 @@ export function EditorShell({ initialProject }: { initialProject: SiteProject })
 
       <InspectorPanel
         element={c.selectedElement}
+        page={c.page}
+        pages={c.project.pages}
         viewport={c.viewport}
+        onPageChange={c.patchPage}
+        onNameChange={c.patchName}
         onLayoutChange={(patch) =>
           c.selectedId && c.patchLayouts({ [c.selectedId]: patch })
         }
         onContentChange={c.patchContent}
         onStyleChange={c.patchStyle}
-        onSharedStyleChange={c.patchSharedStyle}
+        onViewportStyleChange={c.patchViewportStyle}
         onSettingChange={c.patchSetting}
         onComponentDataChange={c.patchComponentData}
+        onActionChange={c.patchAction}
+        onAnimationChange={c.patchAnimation}
         onDelete={c.deleteSelectedElements}
       />
 
