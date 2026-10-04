@@ -1,13 +1,19 @@
 "use client";
 
+import { InspectorAction } from "./InspectorAction";
+import { InspectorAnimation } from "./InspectorAnimation";
+import { InspectorAppearance } from "./InspectorAppearance";
 import { InspectorDisclosure } from "./InspectorDisclosure";
 import { InspectorLayoutControls } from "./InspectorLayoutControls";
 import { InspectorTypography } from "./InspectorTypography";
-import { MemberManager } from "./MemberManager";
+import { PageSettings } from "./PageSettings";
 import type {
+  AnimationSpec,
   ComponentData,
   ElementLayout,
+  SiteAction,
   SiteElement,
+  SitePage,
   ViewportMode,
 } from "./model";
 import { toYouTubeEmbedUrl } from "./youtube-url";
@@ -15,15 +21,19 @@ import "./inspector-ui.css";
 
 type Props = {
   element: SiteElement | null;
+  page: SitePage;
+  pages: SitePage[];
   viewport: ViewportMode;
+  onPageChange: (patch: Partial<SitePage>) => void;
+  onNameChange: (name: string) => void;
   onLayoutChange: (patch: Partial<ElementLayout>) => void;
   onContentChange: (content: string) => void;
   onStyleChange: (patch: Record<string, string | number>) => void;
-  onSharedStyleChange: (patch: Record<string, string | number>) => void;
-  onSettingChange: (
-    patch: Record<string, string | number | boolean>,
-  ) => void;
+  onViewportStyleChange: (patch: Record<string, string | number>) => void;
+  onSettingChange: (patch: Record<string, string | number | boolean>) => void;
   onComponentDataChange: (data: ComponentData) => void;
+  onActionChange: (action: SiteAction | undefined) => void;
+  onAnimationChange: (animation: AnimationSpec) => void;
   onDelete: () => void;
 };
 
@@ -35,42 +45,36 @@ function contentLabel(element: SiteElement) {
 
 export function InspectorPanel(props: Props) {
   const { element, viewport } = props;
+
   if (!element) {
     return (
       <aside className="editor-inspector">
-        <p className="panel-title">元素屬性</p>
-        <p>尚未選取元素</p>
-        <span className="muted">
-          主要操作直接在畫布拖曳／縮放；需要精準數值時再展開右側工具。
-        </span>
+        <PageSettings page={props.page} onChange={props.onPageChange} />
       </aside>
     );
   }
 
   const activeLayout = element[viewport];
-  const editableContent = [
-    "text",
-    "button",
-    "image",
-    "youtube",
-  ].includes(element.type);
-  const editableTypography =
-    element.type === "text" || element.type === "button";
-  const isMemberCarousel =
-    element.type === "component" && element.content === "members";
-  const carouselSpeed = Number(
-    element.settings?.[viewport]?.speed ??
-      (viewport === "mobile" ? 120 : 42),
-  );
+  const editableContent = ["text", "button", "image", "youtube"].includes(element.type);
+  const editableTypography = element.type === "text" || element.type === "button";
   const youtubeValid =
     element.type !== "youtube" ||
     !element.content.trim() ||
     Boolean(toYouTubeEmbedUrl(element.content));
+  const supportsAction = ["text", "image", "button", "shape"].includes(element.type);
 
   return (
     <aside className="editor-inspector">
       <p className="panel-title">元素屬性</p>
-      <strong>{element.name}</strong>
+
+      <label className="content-field">
+        <span>圖層名稱</span>
+        <input
+          value={element.name}
+          onChange={(event) => props.onNameChange(event.target.value)}
+        />
+      </label>
+
       <span className="muted">
         {viewport === "desktop" ? "桌機版" : "手機版"}
       </span>
@@ -83,9 +87,7 @@ export function InspectorPanel(props: Props) {
             onChange={(event) => props.onContentChange(event.target.value)}
             rows={element.type === "youtube" ? 3 : 4}
             placeholder={
-              element.type === "youtube"
-                ? "貼上 YouTube 分享網址"
-                : undefined
+              element.type === "youtube" ? "貼上 YouTube 分享網址" : undefined
             }
           />
           {element.type === "youtube" && (
@@ -98,12 +100,18 @@ export function InspectorPanel(props: Props) {
         </label>
       )}
 
+      <InspectorAppearance
+        element={element}
+        onContentChange={props.onContentChange}
+        onStyleChange={props.onStyleChange}
+      />
+
       {editableTypography && (
         <InspectorTypography
           element={element}
           viewport={viewport}
-          onViewportStyleChange={props.onStyleChange}
-          onSharedStyleChange={props.onSharedStyleChange}
+          onViewportStyleChange={props.onViewportStyleChange}
+          onSharedStyleChange={props.onStyleChange}
         />
       )}
 
@@ -112,7 +120,20 @@ export function InspectorPanel(props: Props) {
         onChange={props.onLayoutChange}
       />
 
-      <InspectorDisclosure title="顯示與進階">
+      {supportsAction && (
+        <InspectorAction
+          element={element}
+          pages={props.pages}
+          onChange={props.onActionChange}
+        />
+      )}
+
+      <InspectorAnimation
+        element={element}
+        onChange={props.onAnimationChange}
+      />
+
+      <InspectorDisclosure title="顯示">
         <label className="inspector-quick-toggle">
           <input
             type="checkbox"
@@ -123,47 +144,14 @@ export function InspectorPanel(props: Props) {
           />
           <span>顯示此元素</span>
         </label>
-
-        {isMemberCarousel && (
-          <label className="content-field">
-            <span>
-              輪播秒數（{viewport === "desktop" ? "桌機" : "手機"}）
-            </span>
-            <input
-              type="number"
-              min="10"
-              max="240"
-              value={carouselSpeed}
-              onChange={(event) =>
-                props.onSettingChange({
-                  speed: Number(event.target.value),
-                })
-              }
-            />
-          </label>
-        )}
       </InspectorDisclosure>
 
-      {isMemberCarousel && (
-        <InspectorDisclosure title="人物輪播管理">
-          <MemberManager
-            element={element}
-            viewport={viewport}
-            onChange={props.onComponentDataChange}
-          />
-        </InspectorDisclosure>
-      )}
-
       <div className="inspector-danger-zone">
-        <button
-          type="button"
-          className="delete-element"
-          onClick={props.onDelete}
-        >
+        <button type="button" className="delete-element" onClick={props.onDelete}>
           刪除元素
         </button>
         <span className="muted">
-          尚未儲存前，重新整理頁面可還原。
+          草稿尚未儲存時，重新整理可回到上次儲存狀態。
         </span>
       </div>
     </aside>
