@@ -37,9 +37,7 @@ export function ElementView({
     boxSizing: "border-box",
     cursor: !editable && element.action ? "pointer" : undefined,
     ...element.style,
-    ...(viewport === "desktop"
-      ? element.desktopStyle
-      : element.mobileStyle),
+    ...(viewport === "desktop" ? element.desktopStyle : element.mobileStyle),
   };
 
   return (
@@ -59,11 +57,7 @@ export function ElementView({
       }}
       {...motionProps(element.animation)}
     >
-      <ElementContent
-        element={element}
-        viewport={viewport}
-        editable={editable}
-      />
+      <ElementContent element={element} viewport={viewport} editable={editable} />
     </motion.div>
   );
 }
@@ -85,24 +79,9 @@ function ElementContent({
     const embedUrl = toYouTubeEmbedUrl(element.content);
     if (!embedUrl) {
       return editable ? (
-        <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "grid",
-            placeItems: "center",
-            background: "#17130e",
-            color: "#d8b56a",
-            fontFamily: "Arial, sans-serif",
-            fontSize: 14,
-            border: "1px solid rgba(216,181,106,.45)",
-          }}
-        >
-          請在右側貼上 YouTube 網址
-        </div>
+        <div className="media-placeholder">請在右側貼上 YouTube 網址</div>
       ) : null;
     }
-
     return (
       <iframe
         src={embedUrl}
@@ -118,9 +97,8 @@ function ElementContent({
     return <button type="button">{element.content}</button>;
   }
 
-  if (element.type === "line") {
-    return <span className="line-element" />;
-  }
+  if (element.type === "line") return <span className="line-element" />;
+  if (element.type === "shape") return <span className="shape-element" />;
 
   if (element.type === "component") {
     return (
