@@ -1,11 +1,11 @@
 import { CraftBridge } from "@/editor/CraftBridge";
 import { EditorShell } from "@/editor/EditorShell";
-import { renwoxingProject } from "@/editor/renwoxing-project";
+import { genericProject } from "@/editor/generic-project";
 
 export default function EditorPage() {
   return (
     <CraftBridge>
-      <EditorShell initialProject={renwoxingProject} />
+      <EditorShell initialProject={genericProject} />
     </CraftBridge>
   );
 }
