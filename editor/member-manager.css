@@ -1,0 +1,120 @@
+.member-manager {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #c4b79e;
+}
+
+.member-manager-title {
+  margin: 0 0 10px;
+  color: #6e532b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.member-tabs {
+  display: grid;
+  gap: 5px;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 12px;
+}
+
+.member-tabs button {
+  margin: 0;
+  padding: 7px 8px;
+  font-size: 11px;
+}
+
+.member-fields,
+.member-modal-settings > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.member-fields label,
+.member-modal-settings label {
+  display: grid;
+  gap: 4px;
+  color: #6e5f49;
+  font-size: 11px;
+}
+
+.member-fields input,
+.member-modal-settings input,
+.member-modal-settings select {
+  width: 100%;
+  border: 1px solid #c4b79e;
+  background: #fffaf0;
+  color: #17130d;
+  padding: 7px;
+}
+
+.member-image-drop {
+  display: grid;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px;
+  border: 1px dashed #a38d67;
+  background: rgba(255, 250, 240, .6);
+  color: #6e5f49;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.member-image-drop img {
+  width: 100%;
+  height: 92px;
+  object-fit: cover;
+  background: #17130e;
+}
+
+.member-image-drop strong {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.member-image-drop input {
+  display: none;
+}
+
+.member-modal-settings {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.member-modal-settings > strong {
+  color: #6e532b;
+  font-size: 11px;
+}
+
+.member-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin-top: 12px;
+}
+
+.member-actions button {
+  margin: 0;
+  padding: 8px;
+  font-size: 10px;
+}
+
+.member-actions .danger {
+  border-color: #9c4c3c;
+  color: #8d3024;
+}
+
+.member-actions button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.member-upload-message {
+  margin: 10px 0 0;
+  color: #6e532b;
+  font-size: 10px;
+  line-height: 1.5;
+}

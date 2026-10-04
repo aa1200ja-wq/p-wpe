@@ -1,0 +1,47 @@
+.page-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin: 0 0 18px;
+}
+.page-actions button {
+  margin: 0;
+  padding: 8px 7px;
+  font-size: 11px;
+}
+.page-actions .danger {
+  border-color: #9c4c3c;
+  color: #8d3024;
+}
+.page-name-button {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+.page-name-button small {
+  opacity: 0;
+  color: #8a7b66;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.page-name-button:hover small { opacity: .8; }
+.page-name-input {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: 1px solid #8c6b2f;
+  background: #fffaf0;
+  color: #17130d;
+  font: inherit;
+}
+.site-element.selected {
+  outline: 2px solid #d8b56a;
+  outline-offset: 1px;
+}
+.editor-multi-picking .moveable-control-box,
+.editor-multi-picking .moveable-control,
+.editor-multi-picking .moveable-line,
+.editor-multi-picking .moveable-area {
+  pointer-events: none !important;
+}

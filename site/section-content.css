@@ -1,0 +1,194 @@
+.about-visual,
+.booking-visual,
+.video-frame,
+.contact-lines {
+  position: absolute;
+  right: 7vw;
+  bottom: 8vh;
+  width: min(34vw, 480px);
+  height: min(34vw, 480px);
+}
+
+.big-number {
+  position: absolute;
+  right: 0;
+  bottom: -8%;
+  font-size: min(34vw, 440px);
+  line-height: .8;
+  color: rgba(142, 94, 34, .09);
+}
+
+.about-lines {
+  position: absolute;
+  right: 2%;
+  top: 25%;
+  width: 62%;
+  display: grid;
+  gap: 18px;
+}
+
+.about-lines span {
+  border-top: 1px solid rgba(116, 82, 42, .35);
+}
+
+.about-visual > p {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font: 700 10px Arial, sans-serif;
+  letter-spacing: .2em;
+  color: #9a6b2b;
+}
+
+.event-grid {
+  position: absolute;
+  right: 6vw;
+  bottom: 8vh;
+  width: min(39vw, 580px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.event-tile {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  border: 1px solid rgba(107, 73, 31, .24);
+  background: #17130e;
+}
+
+.event-tile > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.event-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 32%, rgba(12, 8, 5, .88));
+}
+
+.event-copy {
+  position: absolute;
+  z-index: 2;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  color: #f0e4d1;
+}
+
+.event-tile > span {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  left: 14px;
+  font: 42px Georgia, serif;
+  color: rgba(239, 227, 202, .75);
+}
+
+.event-tile strong {
+  font: 700 13px Arial, sans-serif;
+  letter-spacing: .18em;
+}
+
+.event-tile small {
+  display: block;
+  margin-top: 8px;
+  color: #d0a45f;
+}
+
+.booking-visual {
+  border: 1px solid rgba(117, 79, 31, .25);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.booking-ring {
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(117, 79, 31, .22);
+  border-radius: 50%;
+}
+
+.booking-ring.inner {
+  inset: 28%;
+}
+
+.booking-visual strong {
+  font-size: 72px;
+  font-weight: 400;
+  color: #9d6b2a;
+}
+
+.booking-visual small {
+  position: absolute;
+  bottom: 19%;
+  font: 700 9px Arial, sans-serif;
+  letter-spacing: .16em;
+}
+
+.video-frame {
+  height: min(25vw, 320px);
+  width: min(40vw, 620px);
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(106, 72, 30, .28);
+  background: #17120d;
+}
+
+.video-frame button {
+  width: 78px;
+  height: 78px;
+  border: 1px solid #c18b3d;
+  border-radius: 50%;
+  background: rgba(0,0,0,.2);
+  color: #d6a24e;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.video-frame span {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  font: 700 9px Arial, sans-serif;
+  color: #c18b3d;
+  letter-spacing: .16em;
+}
+
+.contact-lines {
+  height: auto;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(107,73,31,.2);
+}
+
+.contact-lines p {
+  margin: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(107,73,31,.2);
+  font-size: 18px;
+}
+
+.contact-lines span {
+  display: inline-block;
+  width: 48px;
+  color: #a16e2c;
+  font: 700 10px Arial, sans-serif;
+}
+
+@media (max-width: 760px) {
+  .about-visual,
+  .booking-visual,
+  .video-frame,
+  .contact-lines,
+  .event-grid {
+    display: none;
+  }
+}

@@ -1,0 +1,40 @@
+.mobile-activity-strip {
+  position: absolute;
+  z-index: 8;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-right: 30px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
+}
+.mobile-activity-strip::-webkit-scrollbar { display: none; }
+.mobile-activity-strip button {
+  position: relative;
+  flex: 0 0 72%;
+  height: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: #17130e;
+  scroll-snap-align: start;
+  touch-action: manipulation;
+}
+.mobile-activity-strip button:active { transform: scale(.98); }
+.mobile-activity-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mobile-activity-strip span {
+  position: absolute;
+  right: 8px;
+  bottom: 7px;
+  padding: 3px 6px;
+  background: rgba(0, 0, 0, .54);
+  color: #f4eddf;
+  font: 700 10px Arial, sans-serif;
+}

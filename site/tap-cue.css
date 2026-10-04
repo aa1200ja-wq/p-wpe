@@ -1,0 +1,25 @@
+.tap-hand-cycle {
+  opacity: 0;
+  animation: tapHandCycle 7s ease-in-out infinite;
+}
+
+.tap-text-blink {
+  animation: tapTextBlink 3.8s ease-in-out infinite;
+}
+
+@keyframes tapHandCycle {
+  0%, 14% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.03);
+  }
+
+  18%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes tapTextBlink {
+  0%, 100% { opacity: .28; }
+  50% { opacity: 1; }
+}

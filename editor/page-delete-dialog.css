@@ -1,0 +1,41 @@
+.page-delete-backdrop {
+  position: fixed;
+  z-index: 13000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, .48);
+}
+.page-delete-dialog {
+  width: min(360px, calc(100vw - 32px));
+  padding: 20px;
+  border: 1px solid #8c7657;
+  background: #f5ecdc;
+  color: #211a12;
+}
+.page-delete-dialog p {
+  margin: 8px 0 16px;
+  color: #6e5f49;
+  font-size: 13px;
+}
+.page-delete-dialog label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+.page-delete-dialog > div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.page-delete-dialog button {
+  padding: 8px 14px;
+  border: 1px solid #9b8a70;
+  background: transparent;
+}
+.page-delete-dialog .danger {
+  border-color: #9c4c3c;
+  color: #8d3024;
+}

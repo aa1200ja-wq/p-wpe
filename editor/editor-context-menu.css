@@ -1,0 +1,25 @@
+.editor-context-menu {
+  position: fixed;
+  z-index: 12000;
+  width: 150px;
+  padding: 6px;
+  border: 1px solid #6e6252;
+  background: #f5ecdc;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .28);
+}
+.editor-context-menu button {
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  background: transparent;
+  color: #211a12;
+  text-align: left;
+}
+.editor-context-menu button:hover:not(:disabled) { background: #dfcfad; }
+.editor-context-menu button:disabled { opacity: .35; cursor: default; }
+.editor-context-menu hr {
+  margin: 4px 0;
+  border: 0;
+  border-top: 1px solid #c4b79e;
+}
+.editor-context-menu .danger { color: #8d3024; }

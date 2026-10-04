@@ -1,0 +1,30 @@
+.inner-sync-box {
+  margin: -4px 0 22px;
+  padding: 12px;
+  border: 1px solid #c4b79e;
+  background: rgba(255, 250, 240, .55);
+}
+
+.inner-sync-box label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.inner-sync-box input {
+  margin: 0;
+}
+
+.inner-sync-box small {
+  display: block;
+  margin: 8px 0 10px;
+  color: #786c58;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.inner-sync-box button {
+  margin: 0;
+  font-size: 11px;
+}

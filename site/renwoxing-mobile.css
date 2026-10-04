@@ -1,0 +1,28 @@
+@media (max-width: 760px) {
+  .hero-kicker { left: 7%; top: 6%; }
+  .vertical-title { left: 7%; top: 24%; font-size: 56px; }
+  .hero-vinyl-wrap { left: 6%; top: 53%; width: 92vw; }
+  .hero-copy { display: none; }
+  .hero-tagline { left: 7%; bottom: 5%; font-size: 14px; }
+  .hero-tagline p, .hero-tagline strong { font-size: 14px; }
+  .tap-cue { left: auto; right: 8%; bottom: 4%; }
+  .tap-cue img { width: 82px; height: 105px; }
+
+  .content-scene { grid-template-columns: 100%; }
+  .record-rail { position: absolute; z-index: 2; inset: 0; pointer-events: none; }
+  .record-rail .brand-mark { pointer-events: auto; }
+  .record-rail .vinyl-stage {
+    width: 66vw;
+    left: -28vw;
+    top: 25%;
+    opacity: .78;
+    pointer-events: auto;
+  }
+  .record-rail > p { display: none; }
+  .cream-panel { margin-top: 38%; height: 62%; padding: 28px 24px; }
+  .section-nav { gap: 8px 12px; }
+  .section-nav button { font-size: 11px; }
+  .section-copy { margin-top: 8vh; }
+  .section-copy h2 { font-size: 38px; }
+  .section-index { font-size: 72px; }
+}

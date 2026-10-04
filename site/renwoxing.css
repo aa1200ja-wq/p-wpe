@@ -1,0 +1,232 @@
+.renwoxing-experience {
+  --gold: #c68b2d;
+  --cream: #efe3ca;
+  --ink: #0b0906;
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background: #070706;
+  color: #f2eadb;
+  font-family: Georgia, "Noto Serif TC", serif;
+}
+
+.surface-texture {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.22), rgba(0,0,0,.05)),
+    url("/assets/renwoxing/hero-surface.jpg") center/cover no-repeat;
+  pointer-events: none;
+}
+
+.hero-scene,
+.content-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-kicker {
+  position: absolute;
+  top: 9%;
+  left: 19%;
+  z-index: 4;
+  color: var(--gold);
+  font: 700 11px/1 Arial, sans-serif;
+  letter-spacing: .08em;
+}
+
+.vertical-title {
+  position: absolute;
+  left: 19%;
+  top: 44%;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  transform: translateY(-50%);
+  font-size: clamp(58px, 5.5vw, 102px);
+  line-height: .92;
+  color: #f1eadc;
+}
+
+.hero-vinyl-wrap {
+  position: absolute;
+  z-index: 3;
+  left: 28%;
+  top: 50%;
+  width: min(52vw, 800px);
+  aspect-ratio: 1;
+  transform: translateY(-50%);
+}
+
+.vinyl-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  filter: drop-shadow(0 22px 32px rgba(0,0,0,.55));
+}
+
+.vinyl-spin {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.vinyl-disc,
+.vinyl-label,
+.vinyl-sax {
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.vinyl-disc { inset: 0; width: 100%; height: 100%; }
+.vinyl-label { left: 33%; top: 33%; width: 34%; height: 34%; }
+.vinyl-sax { left: 41%; top: 34%; width: 18%; height: 34%; }
+
+.hero-copy {
+  position: absolute;
+  z-index: 6;
+  left: 68%;
+  top: 41%;
+  color: #d29a3d;
+}
+
+.hero-copy p { margin: 78px 0 12px; color: #e8ddc6; }
+.hero-copy small { display: block; margin-top: 20px; font: 700 9px/1.55 Arial; color: #b88734; }
+.hero-link { border: 0; background: none; color: #d29a3d; font: inherit; cursor: pointer; }
+.gold-rule { display: block; width: 28px; border-top: 2px solid #b8832f; }
+
+.tap-cue {
+  position: absolute;
+  z-index: 8;
+  left: 62%;
+  bottom: 4%;
+  display: grid;
+  justify-items: center;
+  color: #efe5d4;
+  font-family: Arial, sans-serif;
+}
+
+.tap-cue img { width: 120px; height: 150px; object-fit: contain; margin-bottom: -38px; }
+.tap-cue strong { font-size: 13px; }
+.tap-cue span { font-size: 10px; opacity: .82; }
+.tap-cue small { margin-top: 12px; font-size: 9px; font-weight: 800; letter-spacing: .08em; }
+
+.hero-tagline {
+  position: absolute;
+  z-index: 5;
+  left: 18%;
+  bottom: 8%;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.hero-tagline > span { color: var(--gold); }
+.hero-tagline strong { font-size: 18px; }
+.hero-tagline p { margin: 18px 0 0; font-size: 18px; }
+
+.content-scene { display: grid; grid-template-columns: 38% 62%; }
+.record-rail { position: relative; min-width: 0; }
+.record-rail .brand-mark {
+  position: absolute;
+  top: 6%;
+  left: 8%;
+  z-index: 8;
+  border: 0;
+  background: none;
+  color: #efe6d7;
+  font: 700 28px Georgia, serif;
+  cursor: pointer;
+}
+
+.record-rail .vinyl-stage {
+  position: absolute;
+  width: 78%;
+  height: auto;
+  aspect-ratio: 1;
+  left: -8%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.record-rail > p {
+  position: absolute;
+  left: 8%;
+  bottom: 7%;
+  color: #b98536;
+  letter-spacing: .18em;
+  font-size: 12px;
+}
+
+.cream-panel {
+  position: relative;
+  height: 100%;
+  background: var(--cream) url("/assets/renwoxing/album-spread.webp") right center / auto 100% no-repeat;
+  color: #17130e;
+  padding: 7vh 7vw 6vh;
+  box-shadow: -30px 0 80px rgba(0,0,0,.26);
+}
+
+.section-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  border-bottom: 1px solid rgba(70,51,28,.22);
+  padding-bottom: 18px;
+}
+
+.section-nav button,
+.back-home {
+  border: 0;
+  background: none;
+  color: #65553f;
+  font: 600 13px Arial, sans-serif;
+  cursor: pointer;
+}
+
+.section-nav button.active { color: #15110c; border-bottom: 2px solid #a97024; }
+
+.section-copy {
+  position: relative;
+  max-width: 720px;
+  margin-top: 14vh;
+}
+
+.section-eyebrow {
+  color: #a86f23;
+  font: 700 11px Arial, sans-serif;
+  letter-spacing: .2em;
+}
+
+.section-copy h2 {
+  margin: 20px 0 26px;
+  max-width: 640px;
+  font-size: clamp(44px, 5vw, 86px);
+  line-height: 1.08;
+  font-weight: 500;
+}
+
+.section-body {
+  max-width: 520px;
+  font-size: 17px;
+  line-height: 1.9;
+  color: #5f5140;
+}
+
+.section-index {
+  position: absolute;
+  right: 0;
+  top: -30px;
+  font: 400 110px/1 Georgia, serif;
+  color: rgba(132,91,37,.12);
+}
+
+.back-home { position: absolute; right: 6vw; bottom: 5vh; }
